@@ -1,0 +1,49 @@
+{load_file("nrngui.hoc")}
+{load_file("variable_dt.ses")} // not used in original publication but
+// has nearly the same results a lot faster Note: the number of 
+// compartments and dt (when electing to use fixed time step uncheck 
+// variable time step and set dt back to original value by unchecking 
+// check mark in dt field of RunControl box) have also been reduced 
+// from the amount used in the publication
+
+// some choosen parameters:
+{nai0_na_ion = 4}
+{nao0_na_ion = 151}
+
+proc set_ek() {
+  forall ek=-85
+}
+
+proc load_3a() {
+  {load_file("Fig3A.ses")}
+  set_ek()
+  PWManager[0].hide(pwmcnt-1)
+}
+proc load_4b10() {
+  {xopen("Fig4B 10APs ver7a.ses")}
+  set_ek()
+  PWManager[0].hide(pwmcnt-1)
+}
+proc load_4b100() {
+  {load_file("Fig4B 100APs ver7a.ses")}
+  set_ek()
+  PWManager[0].hide(pwmcnt-1)
+}
+proc load_6b() {
+  {load_file("Fig6B.ses")}
+  set_ek()
+  PWManager[0].hide(pwmcnt-1)
+}
+
+{xpanel("Fleidervish et al. 2010")}
+  {xbutton("Fig. 3A","load_3a()")}
+  {xbutton("Fig. 4B 10APs ver7a", "load_4b10()")}
+  {xbutton("Fig. 4B 100APs ver7a","load_4b100()")}
+  {xbutton("Fig. 6B", "load_6b()")}
+  {xlabel("After generating a paper figure from the above buttons you")}
+  {xlabel("need to quit and restart to generate another paper")}
+  {xlabel("figure.  You can select quit from the File menu in the Neuron ")}
+  {xlabel("Main Menu, or by type Crtl-D at the oc> prompt")}
+{xpanel()}
+
+{pwmcnt = PWManager[0].count} // the initial gui should not be dismissed
